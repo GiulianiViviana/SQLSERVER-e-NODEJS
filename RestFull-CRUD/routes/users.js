@@ -4,10 +4,10 @@ var router = express.Router();
 const sql = require('mssql')
 
 const config = {
-  user: 'giuliani.viviana',  //Vostro user name
-  password: 'FocaObesa43##', //Vostra password
+  user: '4dd_14',  //Vostro user name
+  password: 'xxx123##', //Vostra password
   server: "213.140.22.237\\sqlexpress",  //Stringa di connessione
-  database: 'wtSchool', //(Nome del DB)
+  database: '4dd_14', //(Nome del DB)
 }
 
 /* GET users listing. */
