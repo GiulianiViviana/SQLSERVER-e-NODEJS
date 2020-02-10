@@ -8,6 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+/*
+const path = require('path');
+
+app.get('/',function(req,res){
+ res.sendFile(path.join(__dirname+'/index.html')); 
+});
+*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
