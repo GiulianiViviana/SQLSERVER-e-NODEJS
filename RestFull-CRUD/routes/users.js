@@ -11,7 +11,7 @@ const config = {
 }
 
 //Function to connect to database and execute query
-let executeQuery = function (res, query, next) {
+let executeQuery = function (res, query, next, pageName) {
   sql.connect(config, function (err) {
     if (err) { //Display error page
       console.log("Error while connecting database :- " + err);
@@ -26,7 +26,7 @@ let executeQuery = function (res, query, next) {
         sql.close();
         return;
       }
-      res.send(result.recordset); //Il vettore con i dati è nel campo recordset (puoi loggare result per verificare)
+      render(pageName,result.recordset,res); //Il vettore con i dati è nel campo recordset (puoi loggare result per verificare)
       console.log(result);
       sql.close();
     });
@@ -34,6 +34,9 @@ let executeQuery = function (res, query, next) {
   });
 }
 
+let render = function(pageName, data, res){
+    res.render(pageName, {data : data })
+}
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
@@ -47,7 +50,7 @@ router.get('/search/:name', function (req, res, next) {
 
 router.get('/all', function (req, res, next){
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
-  executeQuery(res, sqlQuery, next);
+  executeQuery(res, sqlQuery, next, "page") ;
   
   
   
