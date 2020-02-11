@@ -27,6 +27,7 @@ let executeQuery = function (res, query, next) {
         return;
       }
       res.send(result.recordset); //Il vettore con i dati è nel campo recordset (puoi loggare result per verificare)
+      console.log(result);
       sql.close();
     });
 
@@ -44,6 +45,13 @@ router.get('/search/:name', function (req, res, next) {
   executeQuery(res, sqlQuery, next);
 });
 
+router.get('/all', function (req, res, next){
+  let sqlQuery = "select * from dbo.[cr-unit-attributes]";
+  executeQuery(res, sqlQuery, next);
+  
+  
+  
+});
 router.post('/', function (req, res, next) {
   // Add a new Unit  
   let unit = req.body;
