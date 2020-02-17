@@ -37,15 +37,40 @@ let executeQuery = function (res, query, next, pageName) {
 let render = function(pageName, data, res){
     res.render(pageName, {data : data })
 }
+
+
+
+let executeQuery2 = function (res, query,index, next, pageName) {
+  sql.connect(config, function (err) {
+    if (err) { //Display error page
+      console.log("Error while connecting database :- " + err);
+      res.status(500).json({success: false, message:'Error while connecting database', error:err});
+      return;
+    }
+    var request = new sql.Request(); // create Request object
+    request.query(query, function (err, result) { //Display error page
+      if (err) {
+        console.log("Error while querying database :- " + err);
+        res.status(500).json({success: false, message:'Error while querying database', error:err});
+        sql.close();
+        return;
+      }
+      render(pageName,result.recordset[index],res); //Il vettore con i dati è nel campo recordset (puoi loggare result per verificare)
+      console.log(result);
+      sql.close();
+    });
+
+  });
+}
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
   executeQuery(res, sqlQuery, next);
 });
 
-router.get('/search/:name', function (req, res, next) {
-  let sqlQuery = `select * from dbo.[cr-unit-attributes] where Unit = '${req.params.name}'`;
-  executeQuery(res, sqlQuery, next);
+router.get('/search/:id', function (req, res, next) {
+  let sqlQuery = `select * from dbo.[cr-unit-attributes]`;
+  executeQuery2(res, sqlQuery,req.params.id, next, "details");
 });
 
 router.get('/all', function (req, res, next){
