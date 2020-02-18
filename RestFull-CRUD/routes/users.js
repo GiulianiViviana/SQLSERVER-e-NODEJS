@@ -75,10 +75,7 @@ router.get('/search/:id', function (req, res, next) {
 
 router.get('/all', function (req, res, next){
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
-  executeQuery(res, sqlQuery, next, "page") ;
-  
-  
-  
+  executeQuery(res, sqlQuery, next, "page") ;  
 });
 router.post('/', function (req, res, next) {
   // Add a new Unit  
@@ -87,9 +84,9 @@ router.post('/', function (req, res, next) {
     res.status(500).json({success: false, message:'Error while connecting database', error:err});
     return;
   }
-  let sqlInsert = `INSERT INTO dbo.[cr-unit-attributes] (Unit,Cost,Hit_Speed) 
-                     VALUES ('${unit.Unit}','${unit.Cost}','${unit.Hit_Speed}', '${unit.Speed}', '${unit.Deploy_Time}', '${unit.Range}', '${unit.Target}', '${unit.Count}', '${unit.Transport}', '${unit. Type}', '${unit.Rarity}')`;
-  executeQuery(res, sqlInsert, next);
+  let sqlInsert = `INSERT INTO dbo.[cr-unit-attributes] (Unit,Cost,Hit_Speed,Speed,Deploy_Time,Range,Target,Count,Transport,Type,Rarity) 
+                     VALUES ('${unit.Unit}','${unit.Cost}','${unit.Hit_Speed}', '${unit.Speed}', '${unit.Deploy_Time}', '${unit.Range}', '${unit.Target}', '${unit.Count}', '${unit.Transport}', '${unit.Type}', '${unit.Rarity}')`;
+  executeQuery(res, sqlInsert, next, "new_unit");
   res.send({success:true, message: "unità inserita con successo", unit: unit})
 });
 
