@@ -65,7 +65,7 @@ let executeQuery2 = function (res, query,index, next, pageName) {
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
-  executeQuery(res, sqlQuery, next);
+  executeQuery(res, sqlQuery, next, "page");
 });
 
 router.get('/search/:id', function (req, res, next) {
