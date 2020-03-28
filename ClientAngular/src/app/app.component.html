@@ -2,10 +2,6 @@
   get unit list
 </button>
 
-<div *ngIf="data"> <!--se data è vuoto (undefined) non mostra il div-->
-  {{data | json}}
-</div>
-65
 <div *ngFor="let unit of data">  <!--per ogni elemento del vettore ripeto il div-->
   <h1>{{unit.Unit}} </h1>
   costo: {{unit.Cost}} <br>
