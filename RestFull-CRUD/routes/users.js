@@ -38,6 +38,27 @@ let render = function(pageName, data, res){
     res.render(pageName, {data : data })
 }
 
+let executeQuery1 = function (res, query, next) {
+  sql.connect(config, function (err) {
+    if (err) { //Display error page
+      console.log("Error while connecting database :- " + err);
+      res.status(500).json({success: false, message:'Error while connecting database', error:err});
+      return;
+    }
+    var request = new sql.Request(); // create Request object
+    request.query(query, function (err, result) { //Display error page
+      if (err) {
+        console.log("Error while querying database :- " + err);
+        res.status(500).json({success: false, message:'Error while querying database', error:err});
+        sql.close();
+        return;
+      }
+      res.send(result.recordset);
+      sql.close();
+    });
+
+  });
+}
 
 
 let executeQuery2 = function (res, query,index, next, pageName) {
@@ -63,10 +84,11 @@ let executeQuery2 = function (res, query,index, next, pageName) {
   });
 }
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/json', function (req, res, next) {
   let sqlQuery = "select * from dbo.[cr-unit-attributes]";
-  executeQuery(res, sqlQuery, next, "page");
+  executeQuery1(res, sqlQuery, next);
 });
+
 
 router.get('/search/:id', function (req, res, next) {
   let sqlQuery = `select * from dbo.[cr-unit-attributes]`;
