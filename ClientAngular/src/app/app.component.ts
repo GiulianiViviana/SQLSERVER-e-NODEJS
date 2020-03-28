@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private http: HttpClient) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Unit[]>('https://3000-d65b74f5-053e-4ebd-9d27-dacd58a96284.ws-eu01.gitpod.io/users/json');
+    this.obsUnit = this.http.get<Unit[]>('https://3000-f7350c86-11d8-4429-8953-45dcd78fd09e.ws-eu01.gitpod.io/users/json');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Unit[]) => {this.data = data;});
   }
@@ -36,7 +36,7 @@ addUnit(newUnit: HTMLInputElement, newCost: HTMLInputElement, newHitSpeed: HTMLI
     newData.Type = newType.value;
     newData.Rarity = newRarity.value;
     let headers =  {headers: new HttpHeaders().set('Content-Type', 'application/json')};
-    this.postObserver = this.http.post('https://3000-d65b74f5-053e-4ebd-9d27-dacd58a96284.ws-eu01.gitpod.io/users/json', JSON.stringify(newData),headers)
+    this.postObserver = this.http.post('https://3000-f7350c86-11d8-4429-8953-45dcd78fd09e.ws-eu01.gitpod.io/users/json', JSON.stringify(newData),headers)
 
     //Meglio così ma da verificare
     //this.postObserver = this.http.post('http://localhost:3000/users', newData);
