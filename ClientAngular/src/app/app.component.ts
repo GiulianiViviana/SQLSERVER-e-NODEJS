@@ -13,6 +13,17 @@ export class AppComponent {
   data: Unit[];
   postObserver : Observable<Object>;
   postData : Object;
+    Unit : string;
+    Cost : string;
+    Hit_Speed: string;
+    Deploy_Time: string;
+    Range: string;
+    Target: string;
+    Count: string;
+    Transport: string;
+    Type: string;
+    Rarity: string;
+
   constructor(private http: HttpClient) { } //Dependency injection
   getUnitList(): void {
     //Qui va sostituito l’url con quello delle vostre api
@@ -24,7 +35,7 @@ export class AppComponent {
 addUnit(newUnit: HTMLInputElement, newCost: HTMLInputElement, newHitSpeed: HTMLInputElement, newDeployTime: HTMLInputElement,
    newRange: HTMLInputElement, newTarget: HTMLInputElement, newCount: HTMLInputElement, newTransport: HTMLInputElement,
    newType: HTMLInputElement, newRarity: HTMLInputElement): boolean {
-    let newData: Unit = new Unit();
+    let newData: Unit = new Unit(this.Unit,this.Cost,this.Hit_Speed,this.Deploy_Time,this.Range,this.Target,this.Count,this.Transport,this.Type,this.Rarity);
     newData.Unit = newUnit.value;
     newData.Cost = newCost.value;
     newData.Hit_Speed = newHitSpeed.value;
