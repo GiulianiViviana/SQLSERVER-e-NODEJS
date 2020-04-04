@@ -36,7 +36,7 @@ addUnit(newUnit: HTMLInputElement, newCost: HTMLInputElement, newHitSpeed: HTMLI
    newRange: HTMLInputElement, newTarget: HTMLInputElement, newCount: HTMLInputElement, newTransport: HTMLInputElement,
    newType: HTMLInputElement, newRarity: HTMLInputElement): boolean {
     let newData: Unit = new Unit(this.Unit,this.Cost,this.Hit_Speed,this.Deploy_Time,this.Range,this.Target,this.Count,this.Transport,this.Type,this.Rarity);
-    newData.Unit = newUnit.value;
+    newData.Unit = newUnit.value;  //a cosa serve il costruttore se poi rimetti i dati qui sotto?
     newData.Cost = newCost.value;
     newData.Hit_Speed = newHitSpeed.value;
     newData.Deploy_Time = newDeployTime.value;
